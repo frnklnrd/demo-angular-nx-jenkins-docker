@@ -36,9 +36,11 @@ pipeline {
                     '''
                 }
             }
-        }
-		stage('Results') {
-			archiveArtifacts 'log.txt, output/**/*.apk'
-		}		
+        }		
     }
+	post {
+        always {
+            archiveArtifacts artifacts: 'log.txt, output/**/*.apk', onlyIfSuccessful: true
+        }
+    }	
 }
