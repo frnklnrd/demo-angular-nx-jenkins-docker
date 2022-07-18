@@ -16,8 +16,7 @@ pipeline {
 						mkdir -p output
 						chmod -R 755 output						
                         docker build . -t ${name_imagen}:${tag_imagen} -o output --rm
-						cd output
-						ls -l
+						cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> log.txt
                     '''
                 }
             }
