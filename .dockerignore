@@ -1,0 +1,8 @@
+.angular
+.idea
+.vscode
+dist
+node_modules
+*/**/node_modules
+Dockerfile
+package-lock.json
