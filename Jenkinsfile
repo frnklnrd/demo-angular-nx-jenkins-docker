@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-						cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> log.txt
+						cat /var/lib/jenkins/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}/log >> log.txt
                     '''
                 }
             }
