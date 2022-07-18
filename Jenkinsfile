@@ -14,6 +14,7 @@ pipeline {
                 script {
                     sh '''
 						mkdir -p output
+						chmod -R 755 output						
                         docker build . -t ${name_imagen}:${tag_imagen} -o output --rm
 						cd output
 						ls -l
