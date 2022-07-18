@@ -40,7 +40,7 @@ pipeline {
     }
 	post {
         always {
-            archiveArtifacts artifacts: 'log.txt, output/**/*.apk', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'log.txt, **/*.apk', onlyIfSuccessful: true
         }
     }	
 }
