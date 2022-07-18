@@ -23,4 +23,10 @@ pipeline {
             }
         }
     }
+	post {
+		always {
+            archive "project/embsw/debug/**/*"
+			stash includes: 'project/embsw/debug/project_R0.bin', name: 'debugBuiltArtifacts'
+           }
+    }
 }
