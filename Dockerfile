@@ -30,6 +30,8 @@ RUN npx cap update
 
 WORKDIR /app/android
 
+RUN chmod +x gradlew
+
 RUN ./gradlew assembleDebug
 
 #stage 2
