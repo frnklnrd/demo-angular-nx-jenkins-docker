@@ -38,7 +38,7 @@ pipeline {
             }
         }
 		stage('Results') {
-			archiveArtifacts artifacts: 'log.txt, '**/*.apk', followSymlinks: false, onlyIfSuccessful: true
+			archiveArtifacts artifacts: 'log.txt, output/**/*.apk', followSymlinks: false, onlyIfSuccessful: true
 		}		
     }
 }
