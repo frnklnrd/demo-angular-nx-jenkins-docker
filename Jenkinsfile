@@ -9,17 +9,36 @@ pipeline {
         name_final = "${name_imagen}:${tag_imagen}"
     }
     stages {
-        stage('build') {
+        stage('Preparing') {
             steps {
                 script {
                     sh '''
 						mkdir -p output
 						chmod -R 755 output						
+                    '''
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    sh '''
                         docker build . -t ${name_imagen}:${tag_imagen} -o output --rm
+                    '''
+                }
+            }
+        }
+        stage('Logs') {
+            steps {
+                script {
+                    sh '''
 						cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >> log.txt
                     '''
                 }
             }
         }
+		stage('Results') {
+			archiveArtifacts artifacts: 'log.txt, '**/*.apk', followSymlinks: false, onlyIfSuccessful: true
+		}		
     }
 }
