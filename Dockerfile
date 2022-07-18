@@ -38,4 +38,4 @@ RUN ./gradlew assembleDebug
 
 FROM scratch
 
-COPY --from=build-node /app/android/app/build/outputs/apk /
+COPY --from=build-node /app/android/app/build /

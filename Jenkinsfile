@@ -18,8 +18,6 @@ pipeline {
                         docker build . -t ${name_imagen}:${tag_imagen} -o output --rm
 						cd output
 						ls -l
-						cd home
-						ls -l
                     '''
                 }
             }
