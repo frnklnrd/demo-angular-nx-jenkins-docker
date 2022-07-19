@@ -19,11 +19,30 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Build Docker') {
             steps {
                 script {
                     sh '''
-                        docker build . -t ${name_imagen}:${tag_imagen} -o output --rm
+                        docker build . -t ${name_imagen}:${tag_imagen} -o ${WORKSPACE}/output --rm						
+                    '''
+                }
+            }
+        }
+        stage('Browse Result') {
+            steps {
+                script {
+                    sh '''
+                        cd ${WORKSPACE}/output
+						ls -l
+                    '''
+                }
+            }
+        }
+        stage('Clean Docker') {
+            steps {
+                script {
+                    sh '''
+                        docker system prune -a -f
                     '''
                 }
             }
