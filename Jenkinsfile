@@ -28,7 +28,7 @@ pipeline {
                 script {
                     sh '''
 						pwd
-                        docker build --rm -t ${name_imagen}:${tag_imagen} -o - . > out.tar						
+                        docker build --rm -t ${name_imagen}:${tag_imagen} --output type=tar,dest=out.tar .				
                     '''
                 }
             }
