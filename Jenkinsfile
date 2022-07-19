@@ -97,7 +97,7 @@ pipeline {
     }
 	post {
         always {
-            archiveArtifacts artifacts: 'log.txt, **/apk-debug.apk', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'log.txt, **/app-debug.apk', onlyIfSuccessful: true
         }
     }	
 }
