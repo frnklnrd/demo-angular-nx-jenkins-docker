@@ -7,13 +7,16 @@ pipeline {
     }
     environment {
         name_final = "${name_imagen}:${tag_imagen}"
+		build_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
+		log_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
+		output_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}/output"
     }
     stages {
         stage('Preparing') {
             steps {
                 script {
                     sh '''
-						mkdir -p output
+						mkdir -p ${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}/output
 						chmod -R 755 output						
                     '''
                 }
@@ -23,7 +26,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker build . -t ${name_imagen}:${tag_imagen} -o ${WORKSPACE}/output --rm						
+                        docker build . -t ${name_imagen}:${tag_imagen} -o ${output_folder} --rm						
                     '''
                 }
             }
@@ -32,7 +35,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        cd ${WORKSPACE}/output
+                        cd ${output_folder}
 						ls -l
                     '''
                 }
@@ -51,7 +54,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-						cat /var/lib/jenkins/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}/log >> log.txt
+						cat ${log_folder}/log >> log.txt
+						
                     '''
                 }
             }
