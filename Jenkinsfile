@@ -17,6 +17,7 @@ pipeline {
                 script {
                     sh '''
 						mkdir -p ${output_folder}
+						chown -R jenkins:jenkins ${output_folder}						
 						chmod -R 755 ${output_folder}						
                     '''
                 }
