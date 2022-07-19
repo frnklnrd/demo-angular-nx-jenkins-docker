@@ -59,10 +59,14 @@ pipeline {
             steps {
                 script {
                     sh '''
+						rm -R ${output_folder}
+						
 						mkdir -p ${output_folder}
-						chown -R jenkins:jenkins ${output_folder}						
+						
+						chown -R jenkins:jenkins ${output_folder}
+						
 						chmod -R 755 ${output_folder}
-
+						
 						docker container create -i -t --name ${name_container} ${name_final}
 						
 						docker cp ${name_container}:/app/android/app/build/outputs/apk/debug/app-debug.apk ${output_folder}/
