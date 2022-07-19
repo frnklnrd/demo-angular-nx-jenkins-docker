@@ -28,9 +28,7 @@ pipeline {
                 script {
                     sh '''
 						pwd
-                        docker build -t ${name_imagen}:${tag_imagen} -o ${output_folder} --rm .
-						pwd
-						ls -l						
+                        docker build --rm -t ${name_imagen}:${tag_imagen} -o - . > out.tar						
                     '''
                 }
             }
@@ -39,7 +37,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        cd ${output_folder}
+                        pwd
 						ls -l
                     '''
                 }
@@ -60,7 +58,6 @@ pipeline {
                 script {
                     sh '''
 						cat ${log_folder}/log >> log.txt
-						
                     '''
                 }
             }
@@ -68,7 +65,7 @@ pipeline {
     }
 	post {
         always {
-            archiveArtifacts artifacts: 'log.txt, **/*.apk', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'log.txt, out.tar, out-${BUILD_NUMBER}.tar, out-*.tar', onlyIfSuccessful: true
         }
     }	
 }
