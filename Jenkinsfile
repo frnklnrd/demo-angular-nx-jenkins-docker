@@ -48,6 +48,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+						df -h --total
                         docker system prune -a -f
                     '''
                 }
