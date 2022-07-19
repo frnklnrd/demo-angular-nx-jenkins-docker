@@ -69,7 +69,7 @@ pipeline {
 						
 						docker container create -i -t --name ${name_container} ${name_final}
 						
-						docker cp ${name_container}:/app/android/app/build/outputs/apk/debug/app-debug.apk ${output_folder}/
+						docker cp ${name_container}:/app-debug.apk ${output_folder}/
                     '''
                 }
             }
