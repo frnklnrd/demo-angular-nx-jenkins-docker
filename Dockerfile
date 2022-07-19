@@ -1,4 +1,4 @@
-#stage 1
+# stage 1
 
 FROM beevelop/cordova:latest as build-node
 
@@ -34,8 +34,8 @@ RUN chmod +x gradlew
 
 RUN ./gradlew assembleDebug
 
-#stage 2
+# stage 2
 
-FROM scratch
+# FROM scratch
 
-COPY --from=build-node /app/android/app/build /
+# COPY --from=build-node /app/android/app/build/outputs/apk/debug /
