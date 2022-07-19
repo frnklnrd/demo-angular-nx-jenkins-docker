@@ -9,7 +9,7 @@ pipeline {
         name_final = "${name_image}:${tag_image}"
         name_container = "${name_image}-${tag_image}-container"
 
-		job_folder = ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}
+		job_folder = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}"
 		build_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
 		log_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
 		output_folder = "${WORKSPACE}/output"
