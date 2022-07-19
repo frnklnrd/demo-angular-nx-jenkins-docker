@@ -9,15 +9,15 @@ pipeline {
         name_final = "${name_imagen}:${tag_imagen}"
 		build_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
 		log_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
-		output_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}/output"
+		output_folder = "${WORKSPACE}/output"
     }
     stages {
         stage('Preparing') {
             steps {
                 script {
                     sh '''
-						mkdir -p ${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}/output
-						chmod -R 755 output						
+						mkdir -p ${output_folder}
+						chmod -R 755 ${output_folder}						
                     '''
                 }
             }
