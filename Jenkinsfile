@@ -111,7 +111,7 @@ pipeline {
     }
 	post {
         always {
-            archiveArtifacts artifacts: 'log.txt, output/**/app-debug-*.apk', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'Jenkinsfile, Dockerfile, log.txt, output/**/app-debug-*.apk', onlyIfSuccessful: true
         }
     }	
 }
