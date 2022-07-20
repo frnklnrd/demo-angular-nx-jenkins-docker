@@ -28,9 +28,9 @@ RUN mkdir -p /app/android
 
 COPY --from=compile-stage /app/android /app/android
 
-COPY --from=compile-stage /app/licenses /opt/android/
-
 WORKDIR /app/android
+
+RUN cp -R licenses /opt/android/
 
 RUN chmod +x gradlew
 
