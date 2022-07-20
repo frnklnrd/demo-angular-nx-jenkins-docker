@@ -2,15 +2,13 @@
 
 FROM beevelop/nodejs:latest as compile-stage
 
-COPY ./licenses ./opt/android/
-
-RUN npm install -g nx
-
 RUN mkdir -p /app
+
+COPY . ./app
 
 WORKDIR /app
 
-COPY . .
+RUN npm install -g nx
 
 RUN npm install
 
@@ -28,11 +26,11 @@ FROM beevelop/android:latest as build-stage
 
 RUN mkdir -p /app
 
-WORKDIR /app
+COPY --from=compile-stage /app/android /app/
 
-COPY --from=compile-stage /app/android /
+COPY ./licenses ./opt/android/
 
-WORKDIR /android
+WORKDIR /app/android
 
 RUN chmod +x gradlew
 
@@ -44,5 +42,5 @@ FROM nginx:alpine
 
 # FROM scratch
 
-COPY --from=build-stage /android/app/build/outputs/apk/debug/app-debug.apk /
+COPY --from=build-stage /app/android/app/build/outputs/apk/debug/app-debug.apk /
 
