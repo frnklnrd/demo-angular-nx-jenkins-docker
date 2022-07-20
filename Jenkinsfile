@@ -69,7 +69,7 @@ pipeline {
 						
 						docker container create -i -t --name ${name_container} ${name_final}
 						
-						docker cp ${name_container}:/app-debug.apk ${output_folder}/
+						docker cp ${name_container}:/app-debug.apk ${output_folder}/app-debug-${tag_image}-${BUILD_NUMBER}.apk
                     '''
                 }
             }
@@ -101,7 +101,7 @@ pipeline {
     }
 	post {
         always {
-            archiveArtifacts artifacts: 'log.txt, **/app-debug.apk', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'log.txt, **/app-debug-*.apk', onlyIfSuccessful: true
         }
     }	
 }
