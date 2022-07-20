@@ -34,7 +34,7 @@ RUN npx cap update
 
 #---------------------------
 
-FROM beevelop/android-nodejs:latest as build-stage
+FROM beevelop/android:latest as build-stage
 
 RUN mkdir -p /app/android
 
