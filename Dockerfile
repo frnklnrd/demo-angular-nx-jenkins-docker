@@ -2,7 +2,7 @@
 # stage 1
 #---------------------------
 
-FROM beevelop/nodejs:latest as compile-stage
+FROM beevelop/nodejs:latest as build-stage
 
 #---------------------------
 
@@ -31,14 +31,6 @@ RUN npx cap sync
 RUN npx cap update
 
 #---------------------------
-# stage 2
-#---------------------------
-
-FROM beevelop/cordova:latest as build-stage
-
-RUN mkdir -p /app/android
-
-COPY --from=compile-stage /app/android /app/android
 
 WORKDIR /app/android
 
@@ -48,13 +40,13 @@ RUN cp -R licenses /opt/android/
 
 RUN chmod +x gradlew
 
-RUN ./gradlew assembleDebug --debug
+RUN ./gradlew assembleDebug
 
 #---------------------------
-# stage 3
+# stage 2
 #---------------------------
 
-FROM nginx:alpine
+FROM nginx:alpine as final-stage
 
 # FROM scratch
 
