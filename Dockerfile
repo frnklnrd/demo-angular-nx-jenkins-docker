@@ -2,21 +2,19 @@
 # stage 1
 #---------------------------
 
-FROM beevelop/cordova:latest as build-stage
-
-#---------------------------
-
-RUN npm install -g nx
+FROM beevelop/nodejs:latest as compile-stage
 
 #---------------------------
 
 RUN mkdir -p /app
 
-COPY . ./app
-
 WORKDIR /app
 
+COPY . .
+
 #---------------------------
+
+RUN npm install -g nx
 
 RUN npm install
 
@@ -34,6 +32,12 @@ RUN npx cap update
 
 #---------------------------
 
+FROM beevelop/cordova:latest as build-stage
+
+RUN mkdir -p /app/android
+
+COPY --from=compile-stage /app/android /app/android
+
 WORKDIR /app/android
 
 #---------------------------
@@ -45,7 +49,7 @@ RUN chmod +x gradlew
 RUN ./gradlew assembleDebug
 
 #---------------------------
-# stage 2
+# stage 3
 #---------------------------
 
 FROM nginx:alpine as final-stage
