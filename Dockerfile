@@ -38,4 +38,7 @@ RUN ./gradlew assembleDebug
 
 FROM nginx:alpine
 
+# FROM scratch
+
 COPY --from=build-node /app/android/app/build/outputs/apk/debug/app-debug.apk /
+
