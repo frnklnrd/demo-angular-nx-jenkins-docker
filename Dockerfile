@@ -36,7 +36,7 @@ FROM beevelop/cordova:latest as build-stage
 
 RUN mkdir -p /app/android
 
-COPY --from=compile-stage /app/android /app/android
+COPY --from=compile-stage /app /app
 
 WORKDIR /app/android
 
