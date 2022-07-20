@@ -2,7 +2,7 @@
 # stage 1
 #---------------------------
 
-FROM beevelop/android-nodejs:latest as build-stage
+FROM beevelop/nodejs:latest as compile-stage
 
 #---------------------------
 
@@ -31,6 +31,14 @@ RUN npx cap sync
 RUN npx cap update
 
 #---------------------------
+# stage 2
+#---------------------------
+
+FROM beevelop/android:latest as build-stage
+
+RUN mkdir -p /app/android
+
+COPY --from=compile-stage /app/android /app/android
 
 WORKDIR /app/android
 
@@ -43,7 +51,7 @@ RUN chmod +x gradlew
 RUN ./gradlew assembleDebug --debug
 
 #---------------------------
-# stage 2
+# stage 3
 #---------------------------
 
 FROM nginx:alpine
