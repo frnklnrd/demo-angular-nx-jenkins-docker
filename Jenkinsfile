@@ -13,7 +13,8 @@ pipeline {
 		job_folder = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}"
 		build_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
 		log_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
-		output_folder = "output/${BUILD_NUMBER}"
+		output_folder = "output"
+		output_build_folder = "output/${BUILD_NUMBER}"
     }
     stages {
         stage('Clean Container') {
@@ -60,7 +61,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-						mkdir -p ${output_folder}
+						rm -R ${output_folder}
+
+						mkdir -p ${output_build_folder}
 						
 						chown -R jenkins:jenkins ${output_folder}
 						
@@ -68,7 +71,7 @@ pipeline {
 						
 						docker container create -i -t --name ${name_container} ${name_final}
 						
-						docker cp ${name_container}:/app-debug.apk ${output_folder}/app-debug-${tag_image}-${BUILD_NUMBER}.apk
+						docker cp ${name_container}:/app-debug.apk ${output_build_folder}/app-debug-${tag_image}-${BUILD_NUMBER}.apk
                     '''
                 }
             }
@@ -102,7 +105,7 @@ pipeline {
     }
 	post {
         always {
-            archiveArtifacts artifacts: 'log.txt, ${output_folder}/app-debug-*.apk', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'log.txt, output/**/app-debug-*.apk', onlyIfSuccessful: true
         }
     }	
 }
