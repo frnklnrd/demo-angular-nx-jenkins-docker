@@ -6,6 +6,10 @@ FROM beevelop/cordova:latest as build-stage
 
 #---------------------------
 
+RUN npm install -g nx
+
+#---------------------------
+
 RUN mkdir -p /app
 
 COPY . ./app
@@ -13,8 +17,6 @@ COPY . ./app
 WORKDIR /app
 
 #---------------------------
-
-RUN npm install -g nx
 
 RUN npm install
 
