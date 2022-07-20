@@ -2,7 +2,7 @@
 # stage 1
 #---------------------------
 
-FROM beevelop/nodejs:latest as build-stage
+FROM beevelop/cordova:latest as build-stage
 
 #---------------------------
 
