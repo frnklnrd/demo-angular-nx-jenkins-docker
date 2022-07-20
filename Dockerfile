@@ -32,7 +32,7 @@ WORKDIR /app
 
 COPY --from=compile-stage /app/android /
 
-WORKDIR /app/android
+WORKDIR /android
 
 RUN chmod +x gradlew
 
@@ -44,5 +44,5 @@ FROM nginx:alpine
 
 # FROM scratch
 
-COPY --from=build-stage /app/android/app/build/outputs/apk/debug/app-debug.apk /
+COPY --from=build-stage /android/app/build/outputs/apk/debug/app-debug.apk /
 
