@@ -32,7 +32,7 @@ RUN npx cap update
 
 #---------------------------
 
-FROM beevelop/cordova:latest as build-stage
+FROM beevelop/android:latest as build-stage
 
 RUN mkdir -p /app/android
 
