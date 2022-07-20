@@ -28,7 +28,7 @@ RUN mkdir -p /app/android
 
 COPY --from=compile-stage /app/android /app/android
 
-COPY ./licenses ./opt/android/
+COPY --from=compile-stage /app/licenses /opt/android/
 
 WORKDIR /app/android
 
