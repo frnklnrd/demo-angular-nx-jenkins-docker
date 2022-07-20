@@ -1,6 +1,6 @@
 # stage 1
 
-FROM beevelop/cordova:latest as build-node
+FROM beevelop/android-nodejs:latest as build-node
 
 RUN mkdir -p /app
 
