@@ -13,7 +13,7 @@ pipeline {
 		job_folder = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}"
 		build_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
 		log_folder = "${JENKINS_HOME}/jobs/demos/jobs/angular/jobs/demo-angular-nx-jenkins-docker/builds/${BUILD_NUMBER}"
-		output_folder = "${WORKSPACE}/output/${BUILD_NUMBER}"
+		output_folder = "output/${BUILD_NUMBER}"
     }
     stages {
         stage('Clean Container') {
