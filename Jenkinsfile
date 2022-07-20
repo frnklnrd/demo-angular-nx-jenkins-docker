@@ -81,6 +81,8 @@ pipeline {
                 script {
                     sh '''
 						df -h --total
+						
+						docker system df
 
 						docker rm -f ${name_container}
 						
@@ -88,7 +90,11 @@ pipeline {
 
 						df -h --total
 
-                        docker system prune -a -f
+						docker system df
+						
+						docker container prune -f
+
+						docker image prune --filter="dangling=true" -f
                     '''
                 }
             }
