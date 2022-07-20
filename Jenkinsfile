@@ -83,6 +83,8 @@ pipeline {
 						
 						docker rmi -f ${name_final}
 
+						df -h --total
+
                         docker system prune -a -f
                     '''
                 }
