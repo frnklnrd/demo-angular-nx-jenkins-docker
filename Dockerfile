@@ -34,7 +34,7 @@ RUN cp -R licenses /opt/android/
 
 RUN chmod +x gradlew
 
-RUN ./gradlew assembleDebug
+RUN ./gradlew assembleDebug --debug
 
 # stage 3
 
