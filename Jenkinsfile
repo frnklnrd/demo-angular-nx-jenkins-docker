@@ -62,7 +62,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-						rm -R ${output_folder}
+						rm -rf ${output_folder}
 
 						mkdir -p ${output_build_folder}
 						
